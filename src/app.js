@@ -2,35 +2,21 @@
 
 import * as RecordRTC from "recordrtc";
 
-var recorder;
-var theVideo;
-var stopButtonStatus = true;
+
 
 //@inject(Element)
 export class App {
   //public clock: HTMLCanvasElement;
-
-  //sourceObject = HTMLMediaElement.srcObject;
-  //var stopButtonStatus = new Boolean(true);
-  //HTMLVideoElement theVideo;
 
   constructor(element) {
     this.element = element;
     this.stopButtonStatus = true;
   }
 
-  /*   constructor() {
-      //var recorder; // globally accessible
-
-      this.handleBodyClick = e => {
-        console.log("clicked");
-        console.log(e.target);
-      };
-    } */
 
   attached() {
     //const theVideo = this.element.querySelector("video");
-    theVideo = this.theVideo; // same with the ref name
+    //theVideo = this.theVideo; // same with the ref name
 
     //document.addEventListener('click', this.handleBodyClick);
 
@@ -139,23 +125,23 @@ export class App {
 
     this.btnStartRecording.disabled = true;
 
-    var localthis = this;
+    //var localthis = this;
 
     this.captureScreen((screen) => {
       //var video = document.theVideo;
       //var video = this.theVideo; // this should have worked
       //const theVideo = this.element.querySelector('video');
-      theVideo.srcObject = screen;
+      this.theVideo.srcObject = screen;
       //document.theVideo.HTMLMediaElement.srcObject = screen;
 
-      recorder = RecordRTC(screen, {
+      this.recorder = RecordRTC(screen, {
         type: "video",
       });
 
-      recorder.startRecording();
+      this.recorder.startRecording();
 
       // release screen on stopRecording
-      recorder.screen = screen;
+      this.recorder.screen = screen;
 
       //this.document.getElementById("btnStopRecording").stopButtonStatus = false;
 
@@ -163,37 +149,28 @@ export class App {
       console.log("capture ...");
       //this.btnStopRecording.stopButtonStatus = true;
 
-      localthis.stopButtonStatus = false;
+      //localthis.stopButtonStatus = false;
 
-      //this.btnStopRecording.disabled = false;
-      //this.element.querySelector("#searchInput") = "";
-      //this.stopButtonStatusCChanged();
+      this.stopButtonStatus = false;
+
+
     });
   };
-
-  /*   get stopButtonStatusCChanged() {
-    console.log("stopButtonStatusCChanged");
-    return true;
-  } */
-
-  /*   startRecording() {
-     
-    } */
 
   stopRecording = () => {
     console.log("clicked stop");
     //this.disabled = true;
     this.stopButtonStatus = true;
-    recorder.stopRecording(this.stopRecordingCallback);
+    this.recorder.stopRecording(this.stopRecordingCallback);
   };
 
-  stopRecordingCallback() {
-    theVideo.src = theVideo.srcObject = null;
-    theVideo.src = URL.createObjectURL(recorder.getBlob());
+  stopRecordingCallback = () => {
+    this.theVideo.src = this.theVideo.srcObject = null;
+    this.theVideo.src = URL.createObjectURL(this.recorder.getBlob());
 
-    recorder.screen.stop();
-    recorder.destroy();
-    recorder = null;
+    this.recorder.screen.stop();
+    this.recorder.destroy();
+    this.recorder = null;
 
     //document.getElementById("btn-start-recording").disabled = false;
     document.getElementById("btnStartRecording").disabled = false;
