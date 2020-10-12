@@ -1,8 +1,9 @@
 # `screen-recorder-aurelia1`
 
-This project is bootstrapped by [aurelia-cli](https://github.com/aurelia/cli).
+aurelia 1 based screeen recorder
 
-For more information, go to https://aurelia.io/docs/cli/webpack
+This project is bootstrapped by aurelia/new. It was mostly a quick prototype version. works with basic screen recording. It uses recordRTC framework for recording screen.
+
 
 ## Run dev app
 
